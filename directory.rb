@@ -13,13 +13,15 @@
 # ]
 
 def input_students
-  puts "Please enter the names of students"
+  puts "Please enter the name of each student followed by their country"
   puts "To finish, just hit return twice"
   students = []
   name = gets.chomp
-  while !name.empty?
-    students << {name: name, cohort: :november}
+  country = gets.chomp
+  while !name.empty? and !country.empty?
+    students << {name: name, cohort: :november, country: country}
     name = gets.chomp
+    country = gets.chomp
   end
   students
 end
@@ -58,8 +60,10 @@ end
 
 def print(students)
   accumulator = 0
-  while accumulator < students.length 
-    puts "#{accumulator + 1}. #{students[accumulator][:name]} (#{students[accumulator][:cohort]} cohort)"
+  while accumulator < students.length
+    puts "#{accumulator + 1}. #{students[accumulator][:name]}
+    (#{students[accumulator][:cohort]} cohort) from
+    #{students[accumulator][:country]}"
     accumulator += 1
   end
 
