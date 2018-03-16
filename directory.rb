@@ -32,8 +32,8 @@ end
 # end
 
 def print_header
-  puts "the students of Villains' Academy"
-  puts "-------------"
+  puts "the students of Villains' Academy".center(70)
+  puts "---------------------------------".center(70)
 end
 
 # def print(students)
@@ -61,12 +61,9 @@ end
 def print(students)
   accumulator = 0
   while accumulator < students.length
-    puts "#{accumulator + 1}. #{students[accumulator][:name]}
-    (#{students[accumulator][:cohort]} cohort) from
-    #{students[accumulator][:country]}"
+    puts "#{accumulator + 1}. #{students[accumulator][:name]} (#{students[accumulator][:cohort]} cohort) from #{students[accumulator][:country]}".center(70)
     accumulator += 1
   end
-
 end
 
 
