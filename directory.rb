@@ -24,10 +24,10 @@ def input_students
   students
 end
 
-def input_letter
-  puts "Please enter letter to filter names' list"
-  letter = gets.chomp
-end
+# def input_letter
+#   puts "Please enter letter to filter names' list"
+#   letter = gets.chomp
+# end
 
 def print_header
   puts "the students of Villains' Academy"
@@ -40,21 +40,30 @@ end
 #   end
 # end
 
-def print(students, with_letter)
+# def print(students, with_letter)
+#   students.each.with_index(1) do |student, index|
+#     if student[:name][0] == with_letter
+#       puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
+#     end
+#   end
+# end
+
+def print(students)
   students.each.with_index(1) do |student, index|
-    if student[:name][0] == with_letter
+    if student[:name].length < 12
       puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
     end
   end
 end
+
 
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
 
 students = input_students
-with_letter = input_letter
+# with_letter = input_letter
 print_header
-# print(students)
-print(students,with_letter)
+print(students)
+# print(students,with_letter)
 print_footer(students)
