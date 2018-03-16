@@ -12,17 +12,46 @@
 #   {name: "Norman Bates", cohort: :november}
 # ]
 
+# def input_students
+#   puts "Please enter the name of each student followed by their country"
+#   puts "To finish, just hit return twice"
+#   students = []
+#   name = gets.chomp
+#   country = gets.chomp
+#   while !name.empty? and !country.empty?
+#     students << {name: name, cohort: :november, country: country}
+#     name = gets.chomp
+#     country = gets.chomp
+#   end
+#   students
+# end
+
 def input_students
-  puts "Please enter the name of each student followed by their country"
+  puts "Please enter the student's name"
+  puts "Enter typo incase of entering incorrect info"
   puts "To finish, just hit return twice"
   students = []
   name = gets.chomp
-  country = gets.chomp
-  while !name.empty? and !country.empty?
-    students << {name: name, cohort: :november, country: country}
+  while !name.empty?
+    if name == "typo"
+      puts "No problem enter name again"
+    else
+      puts "Please enter the cohort"
+      cohort = gets.chomp.to_sym
+      if !cohort.empty?
+        if cohort == "typo"
+          puts "No problem enter cohort again"
+          cohort = gets.chomp.to_sym
+        else
+          students << {name: name, cohort: cohort}
+        end
+      else
+        students << {name: name, cohort: :november}
+      end
+    end
+    puts "Please enter the student's name"
     name = gets.chomp
-    country = gets.chomp
-  end
+    end
   students
 end
 
@@ -61,7 +90,7 @@ end
 def print(students)
   accumulator = 0
   while accumulator < students.length
-    puts "#{accumulator + 1}. #{students[accumulator][:name]} (#{students[accumulator][:cohort]} cohort) from #{students[accumulator][:country]}".center(70)
+    puts "#{accumulator + 1}. #{students[accumulator][:name]} (#{students[accumulator][:cohort]} cohort)".center(60)
     accumulator += 1
   end
 end
@@ -69,7 +98,7 @@ end
 
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
+  puts "\nOverall, we have #{students.count} great students"
 end
 
 students = input_students
