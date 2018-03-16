@@ -48,13 +48,23 @@ end
 #   end
 # end
 
+# def print(students)
+#   students.each.with_index(1) do |student, index|
+#     if student[:name].length < 12
+#       puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
+#     end
+#   end
+# end
+
 def print(students)
-  students.each.with_index(1) do |student, index|
-    if student[:name].length < 12
-      puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
-    end
+  accumulator = 0
+  while accumulator < students.length 
+    puts "#{accumulator + 1}. #{students[accumulator][:name]} (#{students[accumulator][:cohort]} cohort)"
+    accumulator += 1
   end
+
 end
+
 
 
 def print_footer(students)
