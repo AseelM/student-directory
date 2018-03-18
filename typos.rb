@@ -14,7 +14,12 @@ def input_students
     name = gets.chomp
   end
   # % return the array of students
-  students
+  if students.length == 0
+    puts "there are no students"
+    exit
+  else
+    students
+  end
 end
 
 def print_header
