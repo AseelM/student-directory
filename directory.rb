@@ -123,7 +123,11 @@ end
 
 
 def print_footer(students)
-  puts "\nOverall, we have #{students.count} great students"
+  if students.count == 1
+    puts "\nOverall, we have a great student"
+  else
+    puts "\nOverall, we have #{students.count} great students"
+  end
 end
 
 students = input_students
