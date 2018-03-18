@@ -30,8 +30,10 @@ def input_students
   puts "Please enter the student's name"
   puts "Enter typo incase of entering incorrect info"
   puts "To finish, just hit return twice"
+
   students = []
   name = gets.chomp
+
   while !name.empty?
     if name == "typo"
       puts "No problem enter name again"
@@ -52,6 +54,7 @@ def input_students
     puts "Please enter the student's name"
     name = gets.chomp
     end
+
   students
 end
 
@@ -87,14 +90,36 @@ end
 #   end
 # end
 
-def print(students)
-  accumulator = 0
-  while accumulator < students.length
-    puts "#{accumulator + 1}. #{students[accumulator][:name]} (#{students[accumulator][:cohort]} cohort)".center(60)
-    accumulator += 1
+# def print(students)
+#   accumulator = 0
+#   while accumulator < students.length
+#     puts "#{accumulator + 1}. #{students[accumulator][:name]} (#{students[accumulator][:cohort]} cohort)".center(60)
+#     accumulator += 1
+#   end
+# end
+
+def sort_by_cohort(students)
+  students_by_cohort = {}
+
+  students.each do |student|
+    key = student[:cohort]
+    name = student[:name]
+    if students_by_cohort[key] == nil
+    students_by_cohort[key] = []
+    end
+    students_by_cohort[key].push(name)
   end
+  students_by_cohort
 end
 
+def print(students_by_cohort)
+  students_by_cohort.each do |cohort, value|
+    puts "#{cohort} cohort"
+    value.each do |el|
+      puts "#{el}"
+    end
+  end
+end
 
 
 def print_footer(students)
@@ -104,6 +129,8 @@ end
 students = input_students
 # with_letter = input_letter
 print_header
-print(students)
+# print(students)
+students_by_cohort = sort_by_cohort(students)
+print(students_by_cohort)
 # print(students,with_letter)
 print_footer(students)
