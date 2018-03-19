@@ -29,7 +29,7 @@ def process(selection)
     when "9"
       exit
     else
-      puts "I don't know what you mean, try again"
+      feedback(1)
   end
 end
 
@@ -64,6 +64,7 @@ def save_students
     file.puts csv_line
   end
   file.close
+  feedback(2)
 end
 
 def try_load_students
@@ -85,8 +86,19 @@ def load_students(filename = "students.csv")
     @students << {name: name, cohort: cohort.to_sym}
   end
   file.close
+  feedback(3)
 end
 
+def feedback(number)
+  case number
+  when 1
+    puts "I don't know what you mean, try again"
+  when 2
+    puts "students info is saved"
+  when 3
+    puts "student info is loaded from file"
+  end
+end
 
 def print_header
   puts "The students of my cohort at Makers Academy"
