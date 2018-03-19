@@ -25,8 +25,10 @@ def process(selection)
     when "3"
       puts "Please provide name of file"
       save_students(STDIN.gets.chomp)
+      # STDIN.gets.chomp.nil? ? save_students : save_students(STDIN.gets.chomp)
     when "4"
       puts "Please provide name of file"
+      # STDIN.gets.chomp.nil? ? load_students : load_students(STDIN.gets.chomp)
       load_students(STDIN.gets.chomp)
     when "9"
       exit
@@ -59,13 +61,13 @@ def input_students
 end
 
 def save_students(filename = students.csv)
-  file = File.open(filename, "w")
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+  File.open(filename, "w") do |f2|
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      f2.puts csv_line
+    end
   end
-  file.close
   feedback(2)
 end
 
@@ -82,12 +84,12 @@ def try_load_students
 end
 
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(",")
-    @students << {name: name, cohort: cohort.to_sym}
+  File.open(filename, "r") do |f1|
+    while line = f1.gets
+      name, cohort = line.chomp.split(",")
+      @students << {name: name, cohort: cohort.to_sym}
+    end
   end
-  file.close
   feedback(3)
 end
 
